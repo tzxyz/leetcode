@@ -48,7 +48,7 @@ class Solution:
                     s2.pop(-1)
             else:
                 s2.append(c)
-        return ''.join(s1) == ''.join(s2)
+        return s1 == s2
 
 
 if __name__ == '__main__':
