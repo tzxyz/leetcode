@@ -16,21 +16,34 @@ class MyStack:
         """
         Removes the element on top of the stack and returns that element.
         """
-        result = self.data.pop(len(self.data) - 1)
-        return result
+        result = []
+        if not self.data:
+            return None
+        while len(self.data) > 1:
+            result.append(self.data.pop(0))
+        x = self.data.pop(0)
+        self.data = result
+        return x
 
     def top(self) -> int:
         """
         Get the top element.
         """
-        return self.data[len(self.data) - 1]
+        result = []
+        if not self.data:
+            return None
+        while len(self.data) != 1:
+            result.append(self.data.pop(0))
+        x = self.data.pop(0)
+        result.append(x)
+        self.data = result
+        return x
 
     def empty(self) -> bool:
         """
         Returns whether the stack is empty.
         """
-        return len(self.data) == 0
-
+        return not self.data
 
 
 # Your MyStack object will be instantiated and called as such:
