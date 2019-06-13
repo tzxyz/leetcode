@@ -45,6 +45,20 @@ class Solution:
                 return s.index(c)
         return -1
 
+    def firstUniqChar3(self, s: str) -> int:
+        """
+        原理与 #firstUniqChar2相同，使用数组
+        :param s:
+        :return:
+        """
+        a = [0] * 26
+        for c in s:
+            a[ord(c) - ord('a')] += 1
+        for c in s:
+            if a[ord(c) - ord('a')] == 1:
+                return s.index(c)
+        return -1
+
 
 if __name__ == '__main__':
     tests = [
@@ -57,3 +71,4 @@ if __name__ == '__main__':
     for i, o in tests:
         assert Solution().firstUniqChar(i) == o
         assert Solution().firstUniqChar2(i) == o
+        assert Solution().firstUniqChar3(i) == o
