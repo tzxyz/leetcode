@@ -20,6 +20,7 @@ class Solution:
     链接：https://leetcode-cn.com/problems/set-mismatch
     著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
     """
+
     def findErrorNums(self, nums: List[int]) -> List[int]:
         """
         将数组转换成map，如果改数存在，则表示重复的数字。
@@ -40,6 +41,17 @@ class Solution:
                 break
         return result
 
+    def findErrorNums2(self, nums: List[int]) -> List[int]:
+        """
+        1. 先用sum(nums) - sum(set(nums))计算出重复的数字
+        2. 再用range(1, len(nums) + 1) 和 nums 取差集算出丢失的数字
+        :param nums:
+        :return:
+        """
+        x = sum(nums) - sum(set(nums))
+        y = (set(range(1, len(nums) + 1)) - set(nums)).pop()
+        return [x, y]
+
 
 if __name__ == '__main__':
     tests = [
@@ -49,3 +61,4 @@ if __name__ == '__main__':
     ]
     for i, o in tests:
         assert Solution().findErrorNums(i) == o
+        assert Solution().findErrorNums2(i) == o
