@@ -30,6 +30,21 @@ class Solution:
                 return idx
         return -1
 
+    def firstUniqChar2(self, s: str) -> int:
+        """
+        1. 将所有字符存入dict，value表示出现的次数
+        2. 从头遍历一次字符串，第一次出现 value = 1 的字符就是要找字符
+        :param s:
+        :return:
+        """
+        m = {}
+        for c in s:
+            m[c] = m.get(c, 0) + 1
+        for c in s:
+            if m[c] == 1:
+                return s.index(c)
+        return -1
+
 
 if __name__ == '__main__':
     tests = [
@@ -41,3 +56,4 @@ if __name__ == '__main__':
     ]
     for i, o in tests:
         assert Solution().firstUniqChar(i) == o
+        assert Solution().firstUniqChar2(i) == o
