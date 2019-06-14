@@ -34,13 +34,25 @@ class Solution:
 
     def findTheDifference2(self, s: str, t: str) -> str:
         """
-        将字母转数字求和相减，即多出来的数字
+        将字母转数字求和相减，即多出来的字母
         :param s:
         :param t:
         :return:
         """
         sums = sum(map(ord, t)) - sum(map(ord, s))
         return chr(sums)
+
+    def findTheDifference3(self, s: str, t: str) -> str:
+        """
+        将 s, t 的字符做异或计算，由于两个相同的值异或为 0, 所以异或的结果即多出来的字母
+        :param s:
+        :param t:
+        :return:
+        """
+        result = 0
+        for c in s + t:
+            result ^= ord(c)
+        return chr(result)
 
 
 if __name__ == '__main__':
@@ -51,3 +63,4 @@ if __name__ == '__main__':
     for s, t, c in tests:
         assert Solution().findTheDifference(s, t) == c
         assert Solution().findTheDifference2(s, t) == c
+        assert Solution().findTheDifference3(s, t) == c
