@@ -32,6 +32,16 @@ class Solution:
             tc.remove(c)
         return ''.join(tc)
 
+    def findTheDifference2(self, s: str, t: str) -> str:
+        """
+        将字母转数字求和相减，即多出来的数字
+        :param s:
+        :param t:
+        :return:
+        """
+        sums = sum(map(ord, t)) - sum(map(ord, s))
+        return chr(sums)
+
 
 if __name__ == '__main__':
     tests = [
@@ -40,3 +50,4 @@ if __name__ == '__main__':
     ]
     for s, t, c in tests:
         assert Solution().findTheDifference(s, t) == c
+        assert Solution().findTheDifference2(s, t) == c
