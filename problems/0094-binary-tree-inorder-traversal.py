@@ -1,14 +1,6 @@
 from typing import List
-
-
-class TreeNode:
-    """
-    Definition for a binary tree node.
-    """
-    def __init__(self, x):
-        self.val = x
-        self.left = None
-        self.right = None
+from problems.bst import TreeNode
+from problems.bst import list2bst
 
 
 class Solution:
@@ -33,7 +25,7 @@ class Solution:
 
     def inorderTraversal(self, root: TreeNode) -> List[int]:
         """
-        递归解法
+        递归解法，先访问左子树，再打印节点，再访问右子树
         :param root:
         :return:
         """
@@ -42,11 +34,33 @@ class Solution:
         else:
             return self.inorderTraversal(root.left) + [root.val] + self.inorderTraversal(root.right)
 
+    def inorderTraversal2(self, root: TreeNode) -> List[int]:
+        """
+        使用栈的方式
+        1. 申请一个栈 stack，将 root 压栈
+        2. 将左子树压栈，直到左子树为空
+        3.
+        :param root:
+        :return:
+        """
+        cursor, stack, result = root, [], []
+        while stack or cursor is not None:
+            # 将root以及左子树压栈
+            while cursor is not None:
+                stack.append(cursor)
+                cursor = cursor.left
+            # 弹栈打印节点
+            cursor = stack.pop(-1)
+            result.append(cursor.val)
+            # 赋值cursor
+            cursor = cursor.right
+        return result
+
 
 if __name__ == '__main__':
-    root = TreeNode(1)
-    node1 = TreeNode(2)
-    node2 = TreeNode(3)
-    node1.left = node2
-    root.right = node1
-    print(Solution().inorderTraversal(root))
+    tests = [
+        ([1, 2, 3], [2, 1, 3])
+    ]
+    for i, o in tests:
+        print(Solution().inorderTraversal(list2bst(i)))
+        print(Solution().inorderTraversal2(list2bst(i)))
